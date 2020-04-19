@@ -1,0 +1,32 @@
+<div class="row" style="margin-bottom: 0;">
+  <div class="add col s1 offset-s11">
+    <a href="/create" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">+</i></a>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Заголовок</th>
+        <th>Описание</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    {{#each tasks}}
+    <tr>
+      <th>{{ id }}</th>
+      <th>{{ title}}</th>
+      <th>{{ description }}</th>
+      <th style="width: 35%;">
+        <a href="/show/{{ id }}" class="waves-effect waves-light btn-small">Просмотр</a>
+        <a href="/edit/{{ id }}" class="waves-effect waves-light btn-small blue">Редактировать</a>
+        <a href="/delete/{{ id }}" class="waves-effect waves-light btn-small red">Удалить</a>
+      </th>
+    </tr>
+    {{/each}}
+    <tbody>
+
+    </tbody>
+</div>
