@@ -23,7 +23,7 @@ router.get('/:id', async function (req, res, next) {
 router.post('/:id', async function (req, res, next) {
   const title = req.body.title
   const description = req.body.description
-  connect.query(`UPDATE tasks SET title = '${connect.format(title)}', description = '${connect.format(description)}' WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
+  connect.query(`UPDATE tasks SET title = ${connect.format(title)}, description = ${connect.format(description)} WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
     if (err) throw err
     res.redirect(`/`);
   })
