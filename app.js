@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const exphbs = require("express-handlebars");
-const mysql = require('mysql')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -15,12 +14,6 @@ const deleteRouter = require('./routes/delete');
 
 const app = express();
 
-const connect = mysql.createConnection({
-  host: 'localhost',
-  user: 'andrey',
-  password: 'andrey13',
-  database: 'nodejs'
-})
 
 const hbs = exphbs.create({
   defaultLayout: 'main',

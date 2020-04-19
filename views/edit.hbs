@@ -2,15 +2,15 @@
     <form class="col s12" action="/edit/{{ task.id }}" method="POST">
         <div class="row">
             <div class="input-field col s12">
-                <input id="title" name="title" type="text" class="validate" value="{{ task.title }}" required>
                 <label for="title">Заголовок</label>
+                <input id="title" name="title" type="text" class="validate" value="{{ task.title }}" required>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
+                <label for="title">Описание</label>
                 <input id="description" name="description" type="text" class="validate" value="{{ task.description }}"
                     required>
-                <label for="title">Описание</label>
             </div>
         </div>
         <div class="row">

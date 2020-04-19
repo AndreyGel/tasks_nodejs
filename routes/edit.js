@@ -1,14 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql')
-
-
-const connect = mysql.createConnection({
-  host: 'localhost',
-  user: 'andrey',
-  password: 'andrey13',
-  database: 'nodejs'
-})
+const { connect } = require('../connect.js')
 
 router.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -17,9 +9,13 @@ router.use(function (req, res, next) {
 
 /* GET */
 router.get('/:id', async function (req, res, next) {
-  connect.query(`SELECT * FROM tasks WHERE id = ${req.params.id}`, function (err, rows, fields) {
+  connect.query(`SELECT * FROM tasks WHERE id = ${connect.escape(req.params.id)}`, function (err, rows, fields) {
     if (err) throw err
-    res.render('edit', { title: 'Редактировать', task: rows[0] });
+    if (rows == false) {
+      res.redirect('/')
+    } else {
+      res.render('edit', { title: 'Редактировать', task: rows[0] });
+    }
   })
 });
 
@@ -27,7 +23,7 @@ router.get('/:id', async function (req, res, next) {
 router.post('/:id', async function (req, res, next) {
   const title = req.body.title
   const description = req.body.description
-  connect.query(`UPDATE tasks SET title = '${title}', description = '${description}' WHERE id = ${req.params.id}`, function (err, rows, fields) {
+  connect.query(`UPDATE tasks SET title = '${connect.format(title)}', description = '${connect.format(description)}' WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
     if (err) throw err
     res.redirect(`/`);
   })

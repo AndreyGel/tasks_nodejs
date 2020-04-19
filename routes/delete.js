@@ -1,14 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql')
-
-
-const connect = mysql.createConnection({
-  host: 'localhost',
-  user: 'andrey',
-  password: 'andrey13',
-  database: 'nodejs'
-})
+const { connect } = require('../connect.js')
 
 router.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -18,7 +10,7 @@ router.use(function (req, res, next) {
 
 /* GET */
 router.get('/:id', async function (req, res, next) {
-  connect.query(`DELETE FROM tasks WHERE id = ${req.params.id}`, function (err, rows, fields) {
+  connect.query(`DELETE FROM tasks WHERE id = ${connect.escape(req.params.id)}`, function (err, rows, fields) {
     if (err) throw err
     res.redirect(`/`);
   })
