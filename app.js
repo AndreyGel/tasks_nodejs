@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const exphbs = require("express-handlebars");
 
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const showRouter = require('./routes/show');
@@ -24,6 +25,7 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
+app.use(express.static('files'))
 
 app.use(logger('dev'));
 app.use(express.json());

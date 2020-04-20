@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const multer = require("multer");
 const { connect } = require('../connect.js')
+
+const upload = multer({ dest: "public/images" });
 
 router.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -20,13 +23,20 @@ router.get('/:id', async function (req, res, next) {
 });
 
 /* POST */
-router.post('/:id', async function (req, res, next) {
-  const title = req.body.title
-  const description = req.body.description
-  connect.query(`UPDATE tasks SET title = ${connect.format(title)}, description = ${connect.format(description)} WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
+router.post('/:id', upload.single("filedata"), async function (req, res, next) {
+  connect.query(`SELECT * FROM tasks WHERE id = ${connect.escape(req.params.id)}`, function (err, rows, fields) {
     if (err) throw err
-    res.redirect(`/`);
+    const title = req.body.title
+    const description = req.body.description
+    const filePath = req.file ? 'images/' + req.file.filename : null
+    console.log(rows.file_path, filePath)
+
+    // connect.query(`UPDATE tasks SET title = ${connect.format(title)}, description = ${connect.format(description)} WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
+    // if (err) throw err
+    // res.redirect(`/`);
   })
+})
+  
 });
 
 

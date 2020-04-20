@@ -1,5 +1,5 @@
 <div class="row">
-    <form class="col s12" action="/edit/{{ task.id }}" method="POST">
+    <form class="col s12" action="/edit/{{ task.id }}" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s12">
                 <label for="title">Заголовок</label>
@@ -13,9 +13,20 @@
                     required>
             </div>
         </div>
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Картинка</span>
+                <input name="filedata" type="file">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" value="{{ task.file_path }}">
+            </div>
+        </div>
         <div class="row">
             <button type="submit" class="waves-effect waves-light btn">Сохранить</button>
         </div>
-
     </form>
+    <div class="card-image">
+        <img src="/{{ task.file_path}}">
+    </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="row">
-    <form class="col s12" action="/create" method="POST">
+    <form class="col s12" action="/create" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s12">
                 <label for="title">Заголовок</label>
@@ -10,6 +10,15 @@
             <div class="input-field col s12">
                 <label for="title">Описание</label>
                 <input id="description" name="description" type="text" class="validate" required>
+            </div>
+        </div>
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Картинка</span>
+                <input name="filedata" type="file">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
             </div>
         </div>
         <div class="row">
