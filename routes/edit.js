@@ -28,15 +28,13 @@ router.post('/:id', upload.single("filedata"), async function (req, res, next) {
     if (err) throw err
     const title = req.body.title
     const description = req.body.description
-    const filePath = req.file ? 'images/' + req.file.filename : null
-    console.log(rows.file_path, filePath)
 
-    // connect.query(`UPDATE tasks SET title = ${connect.format(title)}, description = ${connect.format(description)} WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
-    // if (err) throw err
-    // res.redirect(`/`);
+    connect.query(`UPDATE tasks SET title = '${connect.format(title)}', description = '${connect.format(description)}' WHERE id = ${connect.format(req.params.id)}`, function (err, rows, fields) {
+      if (err) throw err
+      res.redirect(`/`);
+    })
   })
-})
-  
+
 });
 
 
